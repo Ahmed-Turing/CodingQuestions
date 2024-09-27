@@ -25,7 +25,7 @@ front-end related questions.
    understand your thought process. Even if you don't finish a section, provide a brief explanation of what you would do
    or some pseudo code.
 1. **Testing**: For the general questions, if you can, write and include tests for your code where applicable.
-1. **Submission**:
+1. **Submission**: Fork the repository and open a pull request for your submission. Ensure all your code is committed and pushed before the deadline.
 1. **Communication**: If you encounter any issues or have questions during the assessment, communicate promptly with the
    provided contact.
 
