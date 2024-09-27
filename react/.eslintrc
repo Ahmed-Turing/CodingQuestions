@@ -1,0 +1,68 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": [ "./tsconfig.json" ],
+    "ecmaVersion": 2022,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "plugins": [ "react", "react-hooks", "import", "@typescript-eslint" ],
+  "rules": {
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
+    "import/no-webpack-loader-syntax": 0,
+    "no-alert": 1,
+    "no-console": 1,
+    "no-empty": 1,
+    "no-var": 1,
+    "no-extra-semi": "warn",
+    "prefer-const": 1,
+    "react-hooks/exhaustive-deps": 0,
+    "@typescript-eslint/ban-ts-comment": 1,
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/prefer-as-const": 1,
+    "@typescript-eslint/no-empty-function": 1,
+    "@typescript-eslint/no-empty-interface": 1,
+    "@typescript-eslint/no-inferrable-types": 0,
+    "@typescript-eslint/no-unused-vars": 1,
+    "@typescript-eslint/no-var-requires": 1
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [ ".ts", ".tsx" ]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      },
+      "node": {
+        "extensions": [ ".js", ".jsx", ".ts", ".tsx" ],
+        "moduleDirectory": [ "node_modules", "src/" ]
+      }
+    },
+    "caseSensitive": false
+  }
+}
