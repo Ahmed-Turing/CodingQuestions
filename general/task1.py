@@ -40,6 +40,43 @@ class NumericArray(list):
         self.sortList(inArray)
 
     def sortList(self, inArray):
-        self.sortingList = inArray
+        self.sortingList = []
+        total = 0
+        apperance = {}
+        numberOfValues = len(inArray)
         #Change min,max,mean,median,mode here
+        for i in inArray:
+            if isinstance(i,str) != False:
+                self.sortingList.append(i)
+                total += i
+                if i in apperance.keys():
+                    apperance[i] += 1
+                else:
+                    apperance.setdefault(i,1)
+            else:
+                numberOfValues -= 1
+            
+        for i in range(0, numberOfValues):
+            for j in range(i+1, numberOfValues):
+                if self.sortingList[i] >= self.sortingList[j]:
+                    self.sortingList[i], self.sortingList[j] = self.sortingList[j],self.sortingList[i]
+        
+        self.min = self.sortingList[0]
+        self.max = self.sortingList[numberOfValues - 1]
+        self.mean = total/numberOfValues
+
+        if numberOfValues % 2 == 1:
+            middleNumber = numberOfValues // 2
+            self.median = self.sortingList[middleNumber]
+        elif numberOfValues % 2 == 0:
+            number1 = numberOfValues / 2
+            number2 = number1 - 1
+            self.median = (self.sortingList[number1] + self.sortingList[number2])/2
+        else:
+            raise Exception("No median found")
+
+        self.mode = max(apperance, key=apperance.get)
+
+
+
     
