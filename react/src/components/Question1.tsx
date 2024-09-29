@@ -31,13 +31,12 @@ const Button = styled.button`
 `;
 export default function Question1() {
     const [count, setCount] = useState(0);
-
-    const update = () => setCount(count + 1);
+    const update = () => setCount(prevCount => prevCount + 1);
 
     // Update state after 2 seconds.
     const asyncUpdate = () => {
         setTimeout(() => {
-            setCount(count + 1);
+            setCount(prevCount => prevCount + 1);
         }, 2000);
     };
 
