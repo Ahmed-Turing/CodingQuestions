@@ -1,10 +1,26 @@
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px;
+    max-width: 400px;
+    margin: auto;
+`;
+
+const CountDisplay = styled.span`
+    font-size: 24px;
+    margin-bottom: 20px;
+`;
+
 
 export default function Question2() {
 
     const [count1, setCount1] = useState(0);
     const [count2, setCount2] = useState(0);
-
+    
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCount1(prevCount1 => prevCount1 + 1);
@@ -22,9 +38,9 @@ export default function Question2() {
     }, []);
 
     return (
-        <div className="App">
-            <p>Counter 1 (1 sec): {count1}</p>
-            <p>Counter 2 (3 sec): {count2}</p>
-        </div>
+        <Container>
+            <CountDisplay>Counter 1 (1 sec): {count1}</CountDisplay>
+            <CountDisplay>Counter 2 (3 sec): {count2}</CountDisplay>
+        </Container>
     );
 }
