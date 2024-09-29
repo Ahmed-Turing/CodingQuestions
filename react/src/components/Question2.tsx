@@ -7,19 +7,19 @@ export default function Question2() {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setCount1(count1 + 1);
+            setCount1(prevCount1 => prevCount1 + 1);
         }, 1000);
 
         return () => clearInterval(intervalId);
-    });
+    }, []);
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setCount2(count2 + 1);
+            setCount2(prevCount2 => prevCount2 + 1);
         }, 3000);
 
         return () => clearInterval(intervalId);
-    });
+    }, []);
 
     return (
         <div className="App">
