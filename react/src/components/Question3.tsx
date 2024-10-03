@@ -1,12 +1,33 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import * as echarts from 'echarts';
 import { DataType } from '../types';
+import ContextMenu , {ContextMenuItem} from './ContextMenu';
 
+//this should call the context menu and allow users to click the copy button to copy the data
+/*const ItemClickHandler = (item: ContextMenuItem, myChart: echarts.ECharts) =>{
+        myChart.getZr().on('contextmenu', function(event){
+            if(event.target && item.caption == "Copy"){
+                navigator.clipboard.writeText(`Length for ${name}: ${value} M`)
+            }else{
+                alert("select data")
+
+            }
+        })
+}
+*/
+var Length: string | undefined = undefined;
+var value: undefined = undefined;
+const ItemClickHandler = (item: ContextMenuItem) =>{
+        if(item.caption == "Copy"){
+            navigator.clipboard.writeText(`Length for ${Length}: ${value} M`)
+        }else{
+            alert("select data")
+        }
+}
 const Question3 = ({ data }: { data: DataType[] }) => {
     useEffect(() => {
         const chartDom = document.getElementById('chart');
         const myChart = echarts.init(chartDom);
-
         const option = {
             title: {
                 text: 'Horizontal Length (M) by Vintage Year'
@@ -15,7 +36,7 @@ const Question3 = ({ data }: { data: DataType[] }) => {
                 trigger: 'item',
                 formatter: (params: { name: any; value: any; }) => {
                     return `${params.name}: ${params.value} M`;
-                }
+                },
             },
             xAxis: {
                 type: 'category',
@@ -25,7 +46,6 @@ const Question3 = ({ data }: { data: DataType[] }) => {
                 nameGap: 35,
                 axisLabel: {
                     interval: 0, // Show all labels
-                    rotate: 45, // Rotate labels to prevent overlap
                     margin: 10, // Space between labels and axis
                 },
                 axisTick: {
@@ -48,30 +68,39 @@ const Question3 = ({ data }: { data: DataType[] }) => {
                 name: 'Vintage Year',
                 type: 'bar',
                 data: data.map((item: DataType) => item.value)
-            }]
+            }],
+            selection: {
+                enabled: true
+            }
         };
 
         myChart.setOption(option);
-        
-        myChart.on('click', (params) =>{
-            if (params.componentType === 'series') {
-                const value = params.value;
-                const name = params.name;
-                navigator.clipboard.writeText(`Length for ${name}: ${value} M`)
-                    .then(() => {
-                        alert(`Copied to clipboard: Length for ${name}: ${value} M`);
-                    })
-                    .catch(err => {
-                        console.error('Could not copy text: ', err)
-                    })
-            }
-        }); 
+        //use a context menu instead of clicking on the bar and then copying
+        myChart.on("contextmenu", function(params){
+            Length = params.name;
+            value = params.value;
+        });
         return () => {
             myChart.dispose();
         };
     }, [data]);
 
-    return <div id="chart" style={{ width: '500px', height: '400px', padding: '20px' }} />;
+    return (<ContextMenu
+        id="link-context-menu" 
+        onItemClicked={ItemClickHandler}
+        items={[
+            {
+                id: "entry1",
+                caption: "Copy"
+            },
+        ]}>
+            <div className='Question3'>
+                    <div
+                        id="chart" style={{ width: '500px', height: '400px', padding: '20px' }} 
+                    />
+            </div>
+        </ContextMenu>
+    );
 };
 
 export default Question3;
