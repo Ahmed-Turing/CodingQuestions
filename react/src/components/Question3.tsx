@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect} from 'react';
 import * as echarts from 'echarts';
 import { DataType } from '../types';
 import ContextMenu , {ContextMenuItem} from './ContextMenu';
@@ -15,15 +15,20 @@ import ContextMenu , {ContextMenuItem} from './ContextMenu';
         })
 }
 */
+var check: boolean = false;
 var Length: string | undefined = undefined;
-var value: undefined = undefined;
-const ItemClickHandler = (item: ContextMenuItem) =>{
+var value: string | number | Date | { [key: string]: string | number | Date | null | undefined; } | (string | number | Date | null | undefined)[] | { id?: (string | number) | undefined; name?: (string | number) | undefined; groupId?: (string | number) | undefined; childGroupId?: (string | number) | undefined; value?: (string | number | Date | null | undefined) | (string | number | Date | null | undefined)[]; selected?: boolean | undefined; } | null | undefined = undefined;
+
+const ItemClickContextMenuHandler = (item: ContextMenuItem) =>{
         if(item.caption == "Copy"){
             navigator.clipboard.writeText(`Length for ${Length}: ${value} M`)
+            Length = undefined;
+            value = undefined;
         }else{
             alert("select data")
         }
 }
+
 const Question3 = ({ data }: { data: DataType[] }) => {
     useEffect(() => {
         const chartDom = document.getElementById('chart');
@@ -77,8 +82,13 @@ const Question3 = ({ data }: { data: DataType[] }) => {
         myChart.setOption(option);
         //use a context menu instead of clicking on the bar and then copying
         myChart.on("contextmenu", function(params){
-            Length = params.name;
-            value = params.value;
+            if(!params.target){
+                Length = params.name;
+                value = params.value;
+                check = true;
+            }else{
+                alert("right click on data");
+            }
         });
         return () => {
             myChart.dispose();
@@ -87,7 +97,7 @@ const Question3 = ({ data }: { data: DataType[] }) => {
 
     return (<ContextMenu
         id="link-context-menu" 
-        onItemClicked={ItemClickHandler}
+        onItemClicked={ItemClickContextMenuHandler}
         items={[
             {
                 id: "entry1",
