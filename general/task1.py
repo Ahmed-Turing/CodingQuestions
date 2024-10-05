@@ -77,6 +77,28 @@ class NumericArray(list):
 
         self.mode = max(apperance, key=apperance.get)
 
+class StringArray(list):
+    def __init__(self, inArray:list):
+        self.frequency = {}
+        self.calcFrequency(inArray)
+    def calcFrequency(self, inArray):
+        total = 0
 
+        for i in inArray:
+            if i in self.frequency:
+                self.frequency[i] += 1
+                total += 1
+            elif i not in self.frequency:
+                self.frequency.setdefault(i,1)
+                total += 1
+            else:
+                raise Exception("Error making frequency table")
+        
+        for i in self.frequency.keys():
+            self.frequency[i] /= total
+        
+        
+
+        
 
     
