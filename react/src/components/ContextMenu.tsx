@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useState, useEffect, useRef, } from "react"
 
-
+// sets up the displayed values for context menu
 type Props = {
     id: string;
     items: ContextMenuItem[];
@@ -24,18 +24,21 @@ const ContextMenu = (props: PropsWithChildren<Props>) =>{
 
     const ref = useRef<HTMLUListElement>(null);
 
+    // opens the menu if the user right clicks, sets position to where their mouse is
     const contextMenuHandler = (e: React.MouseEvent) =>{
         e.preventDefault();
         setIsVisable(true);
         setPosition({x: e.clientX, y: e.clientY});
     }
 
+    // closes the context menu if escape is pressed
     const keyDownHandler = (e: KeyboardEvent) => {
         if(e.code == "Escape"){
             setIsVisable(false);
         }
     }
 
+    // checks if the user is clicking on the context menu. If they are not, close the context menu
     const clickHandler = (e: MouseEvent) => {
         if (isVisable){
             const rect = ref.current?.getBoundingClientRect();
@@ -65,7 +68,7 @@ const ContextMenu = (props: PropsWithChildren<Props>) =>{
         }
 
     }, [keyDownHandler]);
-
+    // apply styling to the context menu and defalt params
     return (<>
         <div onContextMenu={contextMenuHandler}>{children}</div>
         {isVisable && 

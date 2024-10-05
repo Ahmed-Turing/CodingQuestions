@@ -3,18 +3,7 @@ import * as echarts from 'echarts';
 import { DataType } from '../types';
 import ContextMenu , {ContextMenuItem} from './ContextMenu';
 
-//this should call the context menu and allow users to click the copy button to copy the data
-/*const ItemClickHandler = (item: ContextMenuItem, myChart: echarts.ECharts) =>{
-        myChart.getZr().on('contextmenu', function(event){
-            if(event.target && item.caption == "Copy"){
-                navigator.clipboard.writeText(`Length for ${name}: ${value} M`)
-            }else{
-                alert("select data")
-
-            }
-        })
-}
-*/
+// initalizing check, length, and value for context menu handler
 var check: boolean = false;
 var Length: string | undefined = undefined;
 var value: string | number | Date | { [key: string]: string | number | Date | null | undefined; } | (string | number | Date | null | undefined)[] | { id?: (string | number) | undefined; name?: (string | number) | undefined; groupId?: (string | number) | undefined; childGroupId?: (string | number) | undefined; value?: (string | number | Date | null | undefined) | (string | number | Date | null | undefined)[]; selected?: boolean | undefined; } | null | undefined = undefined;
@@ -81,8 +70,10 @@ const Question3 = ({ data }: { data: DataType[] }) => {
         };
 
         myChart.setOption(option);
-        //use a context menu instead of clicking on the bar and then copying
+
+        // checks if the user is right clicking on the data or not
         myChart.on("contextmenu", function(params){
+            //if user is on the data, take the length and value, set the check to true.
             if(!params.target){
                 Length = params.name;
                 value = params.value;
@@ -96,20 +87,22 @@ const Question3 = ({ data }: { data: DataType[] }) => {
         };
     }, [data]);
 
-    return (<ContextMenu
-        id="link-context-menu" 
-        onItemClicked={ItemClickContextMenuHandler}
-        items={[
-            {
-                id: "entry1",
-                caption: "Copy"
-            },
-        ]}>
-            <div className='Question3'>
-                    <div
-                        id="chart" style={{ width: '500px', height: '400px', padding: '20px' }} 
-                    />
-            </div>
+    return (
+        //contextMenu addon covers entire graph area
+        <ContextMenu
+            id="link-context-menu" 
+            onItemClicked={ItemClickContextMenuHandler}
+            items={[
+                {
+                    id: "entry1",
+                    caption: "Copy"
+                },
+            ]}>
+                <div className='Question3'>
+                        <div
+                            id="chart" style={{ width: '500px', height: '400px', padding: '20px' }} 
+                        />
+                </div>
         </ContextMenu>
     );
 };
