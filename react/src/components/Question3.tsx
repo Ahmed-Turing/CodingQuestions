@@ -20,12 +20,13 @@ var Length: string | undefined = undefined;
 var value: string | number | Date | { [key: string]: string | number | Date | null | undefined; } | (string | number | Date | null | undefined)[] | { id?: (string | number) | undefined; name?: (string | number) | undefined; groupId?: (string | number) | undefined; childGroupId?: (string | number) | undefined; value?: (string | number | Date | null | undefined) | (string | number | Date | null | undefined)[]; selected?: boolean | undefined; } | null | undefined = undefined;
 
 const ItemClickContextMenuHandler = (item: ContextMenuItem) =>{
-        if(item.caption == "Copy"){
+        if(item.caption == "Copy" && check == true){
             navigator.clipboard.writeText(`Length for ${Length}: ${value} M`)
             Length = undefined;
             value = undefined;
+            check = false;
         }else{
-            alert("select data")
+            alert("Select the data you would like to copy")
         }
 }
 

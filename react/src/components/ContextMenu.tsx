@@ -11,9 +11,9 @@ export type ContextMenuItem ={
     id: string;
     caption: string;
 }
-//const ref = useRef<HTMLUListElement>(null);
+
 const ContextMenu = (props: PropsWithChildren<Props>) =>{
-    const {items, children, id, onItemClicked} = props;
+    const {items, children, onItemClicked} = props;
 
     const [isVisable, setIsVisable] = useState(false);
 
@@ -22,18 +22,20 @@ const ContextMenu = (props: PropsWithChildren<Props>) =>{
         y: 0,
     });
 
+    const ref = useRef<HTMLUListElement>(null);
+
     const contextMenuHandler = (e: React.MouseEvent) =>{
         e.preventDefault();
         setIsVisable(true);
         setPosition({x: e.clientX, y: e.clientY});
     }
-/*
+
     const keyDownHandler = (e: KeyboardEvent) => {
         if(e.code == "Escape"){
             setIsVisable(false);
         }
-    }*/
-/*
+    }
+
     const clickHandler = (e: MouseEvent) => {
         if (isVisable){
             const rect = ref.current?.getBoundingClientRect();
@@ -44,8 +46,8 @@ const ContextMenu = (props: PropsWithChildren<Props>) =>{
             }
         }
     }
-*/
-/*
+
+
     useEffect( () => {
         window.addEventListener("keydown", keyDownHandler)
 
@@ -54,12 +56,21 @@ const ContextMenu = (props: PropsWithChildren<Props>) =>{
         }
 
     }, [keyDownHandler]);
-*/
+
+    useEffect( () => {
+        window.addEventListener("click", clickHandler)
+
+        return() => {
+            window.removeEventListener("click", clickHandler);
+        }
+
+    }, [keyDownHandler]);
+
     return (<>
         <div onContextMenu={contextMenuHandler}>{children}</div>
         {isVisable && 
             (<ul
-            //ref={ref}
+            ref={ref}
             className={`contextMenu`}
             style={{left: position.x, top: position.y}}
                 
