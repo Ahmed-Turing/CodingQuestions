@@ -6,12 +6,11 @@ class ArrayHandler():
         self.isNumeric = self.checkNumeric(inArray)
         self.isString = self.checkString(inArray)
         if self.isString:
-            raise Exception("Array contains a string that isn't 'n/a'")
+            self.array = StringArray(inArray=inArray)
         elif self.isNumeric:
             self.array = NumericArray(inArray=inArray)
         else:
             raise Exception("Array is of neither numeric and string, unknown case")
-
                 
     def checkString(inArray:list):
         for item in inArray:
@@ -96,7 +95,7 @@ class StringArray(list):
         
         for i in self.frequency.keys():
             self.frequency[i] /= total
-        
+
         
 
         
