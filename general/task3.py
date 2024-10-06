@@ -54,7 +54,7 @@ def fileReader(fileName:str):
                 raise Exception("no extention given")
             else:
                 raise Exception(f"{extention} is not a file type that can be read")
-    except NameError:
+    except FileNotFoundError:
         raise Exception(f"{fileName} was not found within directory")
 
 if __name__ == "__main__":
