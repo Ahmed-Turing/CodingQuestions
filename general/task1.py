@@ -1,33 +1,33 @@
+import os
 
-class ArrayHandler():
-    def __init__(self, inArray:list):
-        self.state = ""
-        self.array = []
-        self.isNumeric = self.checkNumeric(inArray)
-        self.isString = self.checkString(inArray)
-        if self.isString:
-            self.array = StringArray(inArray=inArray)
-        elif self.isNumeric:
-            self.array = NumericArray(inArray=inArray)
-        else:
-            raise Exception("Array is of neither numeric and string, unknown case")
-                
-    def checkString(inArray:list):
+def checkString(inArray:list):
         for item in inArray:
             if isinstance(item, str) and item != "n/a":
                 return True
         return False
 
-    def checkNumeric(inArray:list):
-        check = False
-        for item in inArray:
-            if isinstance(item, int):
-                check = True
-                break
-            elif isinstance(item, float):
-                check = True
-                break
-        return check
+def checkNumeric(inArray:list):
+    check = False
+    for item in inArray:
+        if isinstance(item, int):
+            check = True
+            break
+        elif isinstance(item, float):
+            check = True
+            break
+    return check
+
+class ArrayHandler():
+    def __init__(self, inArray:list):
+        try:
+            self.isNumeric = checkNumeric(inArray)
+            self.isString = checkString(inArray)
+            if self.isString:
+                self.array = StringArray(inArray=inArray)
+            elif self.isNumeric:
+                self.array = NumericArray(inArray=inArray)
+        finally:
+            raise Exception("Array is of neither numeric and string, unknown case")
 
 class NumericArray(list):
     def __init__(self, inArray:list):
@@ -36,16 +36,16 @@ class NumericArray(list):
         self.mean = 0
         self.median = 0
         self.mode = 0
+        self.sortingList = []
         self.sortList(inArray)
 
     def sortList(self, inArray):
-        self.sortingList = []
         total = 0
         apperance = {}
         numberOfValues = len(inArray)
         #Change min,max,mean,median,mode here
         for i in inArray:
-            if isinstance(i,str) != False:
+            if isinstance(i,str) == False:
                 self.sortingList.append(i)
                 total += i
                 if i in apperance.keys():
@@ -68,8 +68,8 @@ class NumericArray(list):
             middleNumber = numberOfValues // 2
             self.median = self.sortingList[middleNumber]
         elif numberOfValues % 2 == 0:
-            number1 = numberOfValues / 2
-            number2 = number1 - 1
+            number1 = int(numberOfValues / 2)
+            number2 = int(number1 - 1)
             self.median = (self.sortingList[number1] + self.sortingList[number2])/2
         else:
             raise Exception("No median found")
@@ -82,13 +82,16 @@ class StringArray(list):
         self.calcFrequency(inArray)
     def calcFrequency(self, inArray):
         total = 0
-
-        for i in inArray:
-            if i in self.frequency:
-                self.frequency[i] += 1
+        punc = '''!()-[]}{;:'"\,<>./?@#$%^&*_~'''
+        for word in inArray:
+            for char in word:
+                if char in punc and word != "n/a":
+                    word = word.replace(char, "")
+            if word in self.frequency:
+                self.frequency[word] += 1
                 total += 1
-            elif i not in self.frequency:
-                self.frequency.setdefault(i,1)
+            elif word not in self.frequency:
+                self.frequency.setdefault(word,1)
                 total += 1
             else:
                 raise Exception("Error making frequency table")
@@ -96,7 +99,31 @@ class StringArray(list):
         for i in self.frequency.keys():
             self.frequency[i] /= total
 
-        
+if __name__ == "__main__":
+    lotsOfStringsFile = "/Users/davidzhao/Dev/CodingQuestions/general/test_files/string_array.txt"
+    with open(lotsOfStringsFile) as stringFile:
+        stringTestArray = stringFile.read().split()
+        stringArrayFormater = ArrayHandler(stringTestArray)
+        print(stringArrayFormater.array.frequency)
+        stringFile.close()
+    lotsOfNumbersFile = "/Users/davidzhao/Dev/CodingQuestions/general/test_files/numbers.txt"
+    with open(lotsOfNumbersFile) as numberFile:
+        numTestArray = numberFile.read().split()
+        for i in range(len(numTestArray)):
+            if(numTestArray[i] != "n/a"):
+                numTestArray[i] = int(numTestArray[i])
+        numArrayFormater = ArrayHandler(numTestArray)
+        print(numArrayFormater.array.min)
+        print(numArrayFormater.array.max)
+        print(numArrayFormater.array.mode)
+        print(numArrayFormater.array.median)
+        print(numArrayFormater.array.mean)
+        print(numArrayFormater.array.sortingList)
+        numberFile.close()
+    stringTestArray.extend(numTestArray)
+    brokenFormater = ArrayHandler(stringTestArray)
+
+
 
         
 
