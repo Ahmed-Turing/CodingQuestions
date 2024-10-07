@@ -8,6 +8,9 @@ import jsonData from './data/data.json';
 import React, { useState } from 'react';
 import Question2 from './components/Question2.tsx';
 import { questions, QuestionDescription } from './data/questions.ts';
+//import ContextMenu, {ContextMenuItem} from './components/ContextMenu.tsx';
+
+
 
 const Container = styled.div`
     display: flex;
@@ -86,7 +89,8 @@ const App = () => {
                 questionComponent = <Question2 />;
                 break;
             case 3:
-                questionComponent = <Question3 data={data['all']} />;
+                questionComponent = 
+                        <Question3 data={data['all']} />
                 break;
             default:
                 questionComponent = null;

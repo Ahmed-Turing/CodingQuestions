@@ -1,0 +1,76 @@
+application_id,gender,international,gpa,major,race,gmat,work_exp,work_industry,admission
+1,Female,FALSE,3.3,Business,Asian,620,3,Financial Services,Admit
+2,Male,FALSE,3.28,Humanities,Black,680,5,Investment Management,
+3,Female,TRUE,3.3,Business,,710,5,Technology,Admit
+4,Male,FALSE,3.47,STEM,Black,690,6,Technology,
+5,Male,FALSE,3.35,STEM,Hispanic,590,5,Consulting,
+6,Male,FALSE,3.18,Business,White,610,6,Consulting,
+7,Female,FALSE,2.93,STEM,Other,590,3,Technology,Admit
+8,Male,TRUE,3.02,Business,,630,6,Financial Services,
+9,Male,FALSE,3.24,Business,White,590,2,Nonprofit/Gov,
+10,Male,FALSE,3.27,Humanities,Asian,690,3,Consulting,
+11,Male,FALSE,3.05,Humanities,White,580,5,Technology,
+12,Male,TRUE,2.85,Humanities,,580,4,PE/VC,
+13,Female,FALSE,3.24,Humanities,Hispanic,640,6,PE/VC,Waitlist
+14,Female,FALSE,3.39,Business,Black,690,4,Nonprofit/Gov,
+15,Female,FALSE,3.03,STEM,White,600,5,Technology,Admit
+16,Female,TRUE,3.05,Humanities,,710,4,Consulting,Admit
+17,Female,FALSE,3.32,Business,Asian,710,5,PE/VC,Admit
+18,Male,FALSE,3.23,Humanities,Black,700,4,Health Care,
+19,Male,FALSE,3.13,Humanities,White,630,6,Financial Services,
+20,Male,TRUE,3.09,Business,,670,8,Consulting,
+21,Male,FALSE,3.46,Business,White,760,5,Investment Banking,Admit
+22,Female,FALSE,3.64,Humanities,Black,710,6,Financial Services,
+23,Female,TRUE,3.42,Business,,640,6,Consulting,Admit
+24,Male,FALSE,3.4,Business,White,680,6,PE/VC,
+25,Female,FALSE,3.47,STEM,White,710,5,Consulting,Admit
+26,Male,FALSE,3.26,Humanities,Asian,690,5,Technology,Admit
+27,Male,TRUE,2.99,STEM,,640,5,Consulting,
+28,Male,FALSE,3.39,STEM,Other,730,4,Other,
+29,Male,FALSE,3.08,Business,Asian,570,7,Retail,
+30,Male,TRUE,3.65,STEM,,700,5,Consulting,Admit
+31,Male,TRUE,3.04,STEM,,610,4,Consulting,
+32,Male,FALSE,3.19,Humanities,White,580,5,PE/VC,
+33,Male,FALSE,3.33,Humanities,Black,700,6,Investment Banking,
+34,Female,FALSE,3.53,STEM,White,710,5,Consulting,Admit
+35,Male,FALSE,3.5,Business,White,650,7,Consulting,
+36,Male,TRUE,3.22,Humanities,,670,4,Other,
+37,Male,FALSE,3.5,STEM,Hispanic,720,5,Health Care,
+38,Female,FALSE,3.16,STEM,Black,590,4,Investment Management,
+39,Female,FALSE,3.3,Humanities,Asian,740,6,Investment Banking,Admit
+40,Female,FALSE,3.45,Humanities,Asian,640,3,PE/VC,Admit
+41,Female,TRUE,3.12,Business,,610,4,PE/VC,Admit
+42,Female,TRUE,3.41,Business,,600,7,Nonprofit/Gov,Admit
+43,Male,FALSE,3.38,Humanities,Asian,720,5,Consulting,
+44,Female,FALSE,2.93,Humanities,Other,590,4,Consulting,Admit
+45,Male,FALSE,3.27,STEM,Other,650,5,Consulting,
+46,Male,FALSE,3.32,STEM,Asian,730,4,Health Care,
+47,Male,TRUE,3.13,Humanities,,610,5,PE/VC,
+48,Male,FALSE,3.33,STEM,Hispanic,720,7,Consulting,Admit
+49,Male,FALSE,3.23,STEM,Black,660,6,Other,
+50,Male,FALSE,3.38,STEM,Hispanic,680,5,Consulting,
+51,Male,FALSE,3.26,Business,White,670,6,Consulting,Waitlist
+52,Male,FALSE,3.43,Business,Asian,650,4,Nonprofit/Gov,
+53,Male,FALSE,3.19,Business,White,650,5,Financial Services,
+54,Female,FALSE,3.23,STEM,Asian,700,6,PE/VC,Admit
+55,Male,FALSE,2.96,STEM,Black,610,6,Consulting,
+56,Female,FALSE,3.44,STEM,Black,680,4,PE/VC,
+57,Male,FALSE,3.09,Business,Other,610,6,Consulting,
+58,Female,TRUE,3.05,Business,,650,7,Health Care,Admit
+59,Male,TRUE,3.01,Humanities,,660,6,Consulting,
+60,Male,FALSE,3.41,Humanities,White,740,4,Financial Services,
+61,Female,FALSE,3.27,Business,White,670,5,Consulting,Admit
+62,Male,FALSE,3.13,Humanities,Black,630,5,Financial Services,
+63,Female,TRUE,3,STEM,,640,3,Financial Services,Admit
+64,Male,FALSE,3.36,STEM,Black,650,5,Technology,
+65,Female,FALSE,3.39,Humanities,White,680,5,Investment Banking,Admit
+66,Male,TRUE,3.31,Business,,670,4,Nonprofit/Gov,
+67,Male,FALSE,3.07,STEM,Other,570,6,Other,
+68,Male,FALSE,3.53,STEM,White,690,5,Technology,
+69,Male,FALSE,3.49,Business,Black,620,4,Energy,
+70,Male,FALSE,3.41,Humanities,White,690,6,Technology,Admit
+71,Male,TRUE,3.34,STEM,,690,5,Nonprofit/Gov,
+72,Female,FALSE,3.33,Humanities,Hispanic,680,5,Consulting,Waitlist
+73,Female,TRUE,3.34,STEM,,680,5,PE/VC,Admit
+74,Female,TRUE,2.89,Humanities,,670,5,Consulting,Admit
+75,Female,TRUE,3.35,Business,,640,5,PE/VC,Admit

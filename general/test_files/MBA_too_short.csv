@@ -1,0 +1,10 @@
+application_id,gender,international,gpa,major,race,gmat,work_exp,work_industry,admission
+1,Female,FALSE,3.3,Business,Asian,620,3,Financial Services,Admit
+2,Male,FALSE,3.28,Humanities,Black,680,5,Investment Management,
+3,Female,TRUE,3.3,Business,,710,5,Technology,Admit
+4,Male,FALSE,3.47,STEM,Black,690,6,Technology,
+5,Male,FALSE,3.35,STEM,Hispanic,590,5,Consulting,
+6,Male,FALSE,3.18,Business,White,610,6,Consulting,
+7,Female,FALSE,2.93,STEM,Other,590,3,Technology,Admit
+8,Male,TRUE,3.02,Business,,630,6,Financial Services,
+9,Male,FALSE,3.24,Business,White,590,2,Nonprofit/Gov,

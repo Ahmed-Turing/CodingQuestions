@@ -1,0 +1,26 @@
+gender,international,gpa,major,race,gmat,work_exp,work_industry,admission
+Female,FALSE,3.3,Business,Asian,620,3,Financial Services,Admit
+Male,FALSE,3.28,Humanities,Black,680,5,Investment Management,
+Female,TRUE,3.3,Business,,710,5,Technology,Admit
+Male,FALSE,n/a,STEM,Black,690,6,Technology,
+Male,FALSE,3.35,STEM,Hispanic,590,5,Consulting,
+Male,FALSE,3.18,Business,White,610,6,Consulting,
+Female,FALSE,2.93,STEM,Other,590,3,Technology,Admit
+Male,TRUE,3.02,Business,,n/a,6,Financial Services,
+Male,FALSE,3.24,Business,White,590,2,Nonprofit/Gov,
+Male,FALSE,3.27,Humanities,Asian,690,3,Consulting,
+Male,FALSE,3.05,Humanities,White,580,5,Technology,
+Male,TRUE,2.85,Humanities,,580,4,PE/VC,
+Female,FALSE,3.24,Humanities,Hispanic,640,6,PE/VC,Waitlist
+Female,FALSE,3.39,Business,Black,690,4,Nonprofit/Gov,
+Female,FALSE,3.03,STEM,White,600,5,Technology,Admit
+Female,TRUE,3.05,Humanities,,n/a,4,Consulting,Admit
+Female,FALSE,3.32,Business,Asian,710,5,PE/VC,Admit
+Male,FALSE,n/a,Humanities,Black,700,4,Health Care,
+Male,FALSE,3.13,Humanities,White,630,6,Financial Services,
+Male,TRUE,3.09,Business,,670,8,Consulting,
+Male,FALSE,3.46,Business,White,760,5,Investment Banking,Admit
+Female,FALSE,3.64,Humanities,Black,710,6,Financial Services,
+Female,TRUE,3.42,Business,,640,6,Consulting,Admit
+Male,FALSE,3.4,Business,White,680,6,PE/VC,
+Female,FALSE,3.47,STEM,White,710,5,Consulting,Admit
