@@ -30,11 +30,11 @@ class ArrayHandler():
             raise Exception("Array is of neither numeric and string, unknown case")
 
 '''
-processes done to an numeric array:
-find min
-find max
-find mean, median, mode
-sort the list of numbers
+    processes done to an numeric array:
+        1. find min
+        2. find max
+        3. find mean, median, mode
+        4. sort the list of numbers
 '''
 class NumericArray(list):
     def __init__(self, inArray:list):
@@ -87,15 +87,16 @@ class NumericArray(list):
         #define the mode from hashmap
         self.mode = max(apperance, key=apperance.get)
 '''
-processes done to an string array
-find frequency of strings apperiance
-remove symbols from words if present
+    processes done to an string array:
+        1. find frequency of strings apperiance
+        2. remove symbols from words if present
 '''
 class StringArray(list):
     def __init__(self, inArray:list):
         self.frequency = {}
         self.array = []
         self.calcFrequency(inArray)
+        
     def calcFrequency(self, inArray):
         total = 0
         punc = '''!()-[]}{;:'"\,<>./?@#$%^&*_~'''
@@ -106,6 +107,7 @@ class StringArray(list):
                     word = word.replace(char, "")
             if word != "n/a" and word != "^p":
                 self.array.append(word)
+
             #create hashmap to find frequency of word appereance
             if word in self.frequency:
                 self.frequency[word] += 1
@@ -167,11 +169,6 @@ def text_task1():
         else:
             raise Exception(e)
         
+
 if __name__ == "__main__":
     text_task1()
-
-
-
-        
-
-    

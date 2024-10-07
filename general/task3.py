@@ -5,15 +5,21 @@ import os
 def textFileProcesser(textFile:str):
     punc = '''!()-[]}{;:'"\,<>./?@#$%^&*_~'''
     inArray = textFile.read().split()
+
+    #if possible, makes text into numeric
     try:
         for i in range(len(inArray)):
             if inArray[i] != "n/a":
                 inArray[i] = int(inArray[i])
+
+    #it not possible, makes array into string array
     except Exception as e:
         for word in inArray:
             for char in word:
                 if char in punc and word != "n/a" and word != "^p":
                     word = word.replace(char, "")
+
+    #use ArrayHandler from task1
     data = fileToArray.ArrayHandler(inArray)
     return data.array
 
@@ -25,6 +31,13 @@ def csvFileProcesser(csvFile:str):
     for row in csvDictReader:
         data.append(row)
     
+    '''
+        3 possible errors from csv file:
+            1. no key for id
+            2. less than 15 rows of data
+            3. more than 50 rows of data
+    '''    
+
     if "application_id" not in keys:
         raise Exception("no key for application_id found")
     elif len(data) < 15:
@@ -36,6 +49,7 @@ def csvFileProcesser(csvFile:str):
         return data
 
 def fileReader(fileName:str):
+    #check if the file is a txt or a csv file
     try:
         outputFile = []
         _, extention = os.path.splitext(fileName)
@@ -50,6 +64,14 @@ def fileReader(fileName:str):
                 csvFile.close()
                 return outputFile
         else:
+
+            '''
+                3 possible errors from file name:
+                    1. no extention was given
+                    2. the file is not a txt or a csv file
+                    3. the file is not found within directory
+            '''
+        
             if extention == "":
                 raise Exception("no extention given")
             else:
@@ -58,7 +80,7 @@ def fileReader(fileName:str):
         raise Exception(f"{fileName} was not found within directory")
 
 def test_task3():
-    flies = {
+    files = {
         "txtFile" : "general/test_files/alice_in_wonderland.txt",
         "goodCsv" : "general/test_files/MBA_good.csv",
         "noIdCsv" : "general/test_files/MBA_missing_id.csv",
@@ -69,8 +91,14 @@ def test_task3():
         "noExtention" : "general/test_files/bad_extention_1",
         "WrongExtention" : "general/test_files/bad_extention_2.dat",
     }
-    for key, value in flies.items():
+
+
+    for key, value in files.items():
+
+        #different case for each error possible
         match key:
+
+            #csv file errors
             case "noIdCsv":
                 try:
                     fileReader(value)
@@ -95,6 +123,8 @@ def test_task3():
                         print("csv file too short error handling is correct")
                     else:
                         print(e)
+
+            #file name errors
             case "badFileName":
                 try:
                     fileReader(value)
@@ -122,6 +152,7 @@ def test_task3():
             case _:
                 fileReader(value)
                 print(f"{key} run successful")
+
 
 if __name__ == "__main__":
     test_task3()

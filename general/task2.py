@@ -122,5 +122,6 @@ def test_task2():
         else:
             raise Exception(e)
     
+
 if __name__ == "__main__":
     test_task2()
