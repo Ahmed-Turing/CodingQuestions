@@ -1,11 +1,12 @@
-import os
 
+#checks if an array is all strings with some n/a
 def checkString(inArray:list):
         for item in inArray:
             if isinstance(item, str) and item != "n/a":
                 return True
         return False
 
+#checks if an array is all numerical values with some n/a
 def checkNumeric(inArray:list):
     check = False
     for item in inArray:
@@ -28,6 +29,13 @@ class ArrayHandler():
         else:
             raise Exception("Array is of neither numeric and string, unknown case")
 
+'''
+processes done to an numeric array:
+find min
+find max
+find mean, median, mode
+sort the list of numbers
+'''
 class NumericArray(list):
     def __init__(self, inArray:list):
         self.min = 0
@@ -42,7 +50,7 @@ class NumericArray(list):
         total = 0
         apperance = {}
         numberOfValues = len(inArray)
-        #Change min,max,mean,median,mode here
+        #removes instances of n/a from numeric list and keeps track of each numbers apperiance in a hashmap
         for i in inArray:
             if isinstance(i,str) == False:
                 self.sortingList.append(i)
@@ -54,15 +62,18 @@ class NumericArray(list):
             else:
                 numberOfValues -= 1
         
+        #sorts the list from least to greatest
         for i in range(0, numberOfValues):
             for j in range(i+1, numberOfValues):
                 if self.sortingList[i] >= self.sortingList[j]:
                     self.sortingList[i], self.sortingList[j] = self.sortingList[j],self.sortingList[i]
         
+        #defines min, max, and mean
         self.min = self.sortingList[0]
         self.max = self.sortingList[numberOfValues - 1]
         self.mean = total/numberOfValues
-
+        
+        #if an odd amount of numbers inputed, median is the value at the middle index, else average out the two center values
         if numberOfValues % 2 == 1:
             middleNumber = numberOfValues // 2
             self.median = self.sortingList[middleNumber]
@@ -73,8 +84,13 @@ class NumericArray(list):
         else:
             raise Exception("No median found")
 
+        #define the mode from hashmap
         self.mode = max(apperance, key=apperance.get)
-
+'''
+processes done to an string array
+find frequency of strings apperiance
+remove symbols from words if present
+'''
 class StringArray(list):
     def __init__(self, inArray:list):
         self.frequency = {}
@@ -84,10 +100,13 @@ class StringArray(list):
         total = 0
         punc = '''!()-[]}{;:'"\,<>./?@#$%^&*_~'''
         for word in inArray:
+            #remove punctuation from word if present, then adds the word to different array
             for char in word:
                 if char in punc and word != "n/a" and word != "^p":
                     word = word.replace(char, "")
-            self.array.append(word)
+            if word != "n/a" and word != "^p":
+                self.array.append(word)
+            #create hashmap to find frequency of word appereance
             if word in self.frequency:
                 self.frequency[word] += 1
                 total += 1
@@ -100,15 +119,20 @@ class StringArray(list):
             self.frequency[i] /= total
 
 def text_task1():
+    #test files
     lotsOfStringsFile = "general/test_files/string_array.txt"
     lotsOfNumbersFile = "general/test_files/numbers.txt"
     checkSort = False
+
+    #tests the string array handling
     with open(lotsOfStringsFile) as stringFile:
         stringTestArray = stringFile.read().split()
         stringArrayFormater = ArrayHandler(stringTestArray)
         print(f"frequency of n/a: {stringArrayFormater.array.frequency['n/a']}")
         stringFile.close()
-    print("string array handled correctly")
+    print("string array handled correctly\n")
+
+    #tests the numeric array handling
     with open(lotsOfNumbersFile) as numberFile:
         numTestArray = numberFile.read().split()
         for i in range(len(numTestArray)):
@@ -132,6 +156,8 @@ def text_task1():
         else:
             raise Exception("numeric list is not sorted")
         numberFile.close()
+
+    #checks if user inputs an array with both string and numeric values
     try:
         stringTestArray.extend(numTestArray)
         brokenFormater = ArrayHandler(stringTestArray)
