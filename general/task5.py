@@ -1,28 +1,32 @@
-#assume array is a block of text, and the sign for next page is some string or int
-#assume sign for page is ^p and 
-#can also assume one page is capped at 500 words if no marker is created
-import task3 as fileHandler
+from task4 import SearchBar
+def showPages(pageArray:list, pageIndex:int, pageSize:int):
+    '''
+        pageArray is array of pages
+        pageIndex is the index of the page of interest
+        pageSize is the amount of characters in a line
+    '''
 
-def createPages(toPages:list):
-    pageCounter = 1;
-    page = {
-        f"page {pageCounter}": []
-    }
-    for word in toPages:
-        currentPage = page[f"page {pageCounter}"]
-        if word != "^p":
-            currentPage.append(word)
-        elif word == "^p":
-            pageCounter += 1
-            page[f"page {pageCounter}"] = []
-        elif len(currentPage) == 500:
-            pageCounter += 1
-            page[f"page {pageCounter}"] = []
-        else:
-            raise Exception("Error making pages for document")
+    page = pageArray[pageIndex]
+    page = page.replace('\n', " ")
+    newChars = pageSize
+    #must cast as list because python string is immutable
+    page = list(page)
+    search = SearchBar(page)
+    spacesArray = search.stringFindAll(" ")
+    for i, space in enumerate(spacesArray):
+        if i + 1 < len(spacesArray):
+            if spacesArray[i + 1] > newChars:
+                page[space] = '\n'
+                newChars = space + pageSize
+    page = "".join(page)
     return page
-        
+def test_task5():
+    textFile= "/Users/davidzhao/Dev/CodingQuestions/general/test_files/pagesTest.txt"
+    with open(textFile) as pages:
+        pageArray = pages.read().split("^p")
+        pages.close()
+    pageIndex = 2
+    pageSize = 20
+    print(showPages(pageArray, pageIndex, pageSize))
 if __name__ == "__main__":
-    textFile = fileHandler.fileReader("/Users/davidzhao/Dev/CodingQuestions/general/test_files/pagesTest.txt")
-    pages = createPages(textFile.array)
-    print(pages["page 2"])
+    test_task5()
