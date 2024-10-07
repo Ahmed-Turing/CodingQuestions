@@ -26,8 +26,10 @@ class ArrayHandler():
                 self.array = StringArray(inArray=inArray)
             elif self.isNumeric:
                 self.array = NumericArray(inArray=inArray)
-        finally:
-            raise Exception("Array is of neither numeric and string, unknown case")
+            else:
+                raise Exception("Array is of neither numeric and string, unknown case")
+        except:
+            raise Exception("issue creating array")
 
 class NumericArray(list):
     def __init__(self, inArray:list):
@@ -54,7 +56,7 @@ class NumericArray(list):
                     apperance.setdefault(i,1)
             else:
                 numberOfValues -= 1
-            
+        
         for i in range(0, numberOfValues):
             for j in range(i+1, numberOfValues):
                 if self.sortingList[i] >= self.sortingList[j]:
@@ -79,14 +81,16 @@ class NumericArray(list):
 class StringArray(list):
     def __init__(self, inArray:list):
         self.frequency = {}
+        self.array = []
         self.calcFrequency(inArray)
     def calcFrequency(self, inArray):
         total = 0
         punc = '''!()-[]}{;:'"\,<>./?@#$%^&*_~'''
         for word in inArray:
             for char in word:
-                if char in punc and word != "n/a":
+                if char in punc and word != "n/a" and word != "^p":
                     word = word.replace(char, "")
+            self.array.append(word)
             if word in self.frequency:
                 self.frequency[word] += 1
                 total += 1
@@ -95,7 +99,6 @@ class StringArray(list):
                 total += 1
             else:
                 raise Exception("Error making frequency table")
-        
         for i in self.frequency.keys():
             self.frequency[i] /= total
 
