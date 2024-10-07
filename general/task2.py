@@ -3,12 +3,14 @@ class DataStore():
         self.values = []
         self.keys = []
 
+    #toString function for debugging
     def toString(self):
         items = ""
         for i in range(len(self.values)):
             items += f"{self.keys[i]}: {self.values[i]}, "
         return items
     
+    #creates keys for values
     def createKey(self, key, value):
         if(key in self.keys):
             valueIndex = self.keys.index(key)
@@ -18,7 +20,8 @@ class DataStore():
             self.values.append(value)
         else:
             raise Exception("Issue when creating key")
-        
+    
+    #reads value from key
     def readKey(self,key):
         if(key in self.keys):
             valueIndex = self.keys.index(key)
@@ -26,13 +29,15 @@ class DataStore():
         else:
             raise Exception(f"{key} does not exist as a key: Cannot read")
         
+    #updates value of key
     def updateKey(self, key, value):
             if(key in self.keys):
                 valueIndex = self.keys.index(key)
                 self.values[valueIndex] = value
             else:
                 raise Exception(f"{key} does not exist as a key: Cannot update")
-            
+    
+    #deletes key and value
     def deleteKey(self, key):
         if(key in self.keys):
             valueIndex = self.keys.index(key)
@@ -42,7 +47,8 @@ class DataStore():
             return valueRemoved
         else:
             raise Exception(f"{key} does not exist as a key: Cannot delete")
-    
+
+#C.R.U.D opperations using python's dictionary functions
 class DataStoreDict(dict):
     def __init__(self, store=dict):
         self.store = store
@@ -91,6 +97,7 @@ def test_task2():
     print(dictStorage.deleteKey("Job"))
     print(dictStorage.toString())
 
+    #checks error handling 
     try:
         storage.updateKey("342",21)
     except Exception as e:
