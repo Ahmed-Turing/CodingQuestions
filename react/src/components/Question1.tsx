@@ -30,6 +30,7 @@ const Button = styled.button`
     }
 `;
 export default function Question1() {
+    //count was outdated when being sent to asyncUpdate, causing the issue
     const [count, setCount] = useState(0);
     const update = () => setCount(prevCount => prevCount + 1);
 

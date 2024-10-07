@@ -20,7 +20,8 @@ export default function Question2() {
 
     const [count1, setCount1] = useState(0);
     const [count2, setCount2] = useState(0);
-    
+    //counts were also stale and outdated
+    //added empty dependency array to ensure the useEffects hooks run once
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCount1(prevCount1 => prevCount1 + 1);
