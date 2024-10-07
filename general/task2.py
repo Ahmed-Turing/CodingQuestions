@@ -24,14 +24,14 @@ class DataStore():
             valueIndex = self.keys.index(key)
             return self.values[valueIndex]
         else:
-            raise Exception(f"'{key}' does not exist as a key: Cannot read")
+            raise Exception(f"{key} does not exist as a key: Cannot read")
         
     def updateKey(self, key, value):
             if(key in self.keys):
                 valueIndex = self.keys.index(key)
                 self.values[valueIndex] = value
             else:
-                raise Exception(f"'{key}' does not exist as a key: Cannot update")
+                raise Exception(f"{key} does not exist as a key: Cannot update")
             
     def deleteKey(self, key):
         if(key in self.keys):
@@ -41,7 +41,7 @@ class DataStore():
             self.values.pop(valueIndex)
             return valueRemoved
         else:
-            raise Exception(f"'{key}' does not exist as a key: Cannot delete")
+            raise Exception(f"{key} does not exist as a key: Cannot delete")
     
 class DataStoreDict(dict):
     def __init__(self, store=dict):
@@ -63,7 +63,8 @@ class DataStoreDict(dict):
         return self.store.pop(key)
     
 
-if __name__ == "__main__":
+def test_task2():
+    #testing DataStore
     storage = DataStore()
     storage.createKey("id", "1")
     storage.createKey("Job", "Accountant")
@@ -71,15 +72,14 @@ if __name__ == "__main__":
     print(storage.toString())
     storage.createKey("Amount","4")
     storage.updateKey("Job", "Manager")
-    #storage.updateKey("342",21)
     print(storage.toString())
     storage.updateKey("Amount", 2)
     print(storage.toString())
     print(storage.readKey("Job"))
-    #print(storage.readKey("1"))
     print(storage.deleteKey("Amount"))
-    #storage.deleteKey("123")
     print(storage.toString())
+
+    #testing DataStoreDict
     dictStorage = DataStoreDict({})
     dictStorage.createKey("id", 1)
     dictStorage.createKey("Job", "Construction")
@@ -90,3 +90,30 @@ if __name__ == "__main__":
     print(dictStorage.readKey("Amount"))
     print(dictStorage.deleteKey("Job"))
     print(dictStorage.toString())
+
+    try:
+        storage.updateKey("342",21)
+    except Exception as e:
+        if(str(e) == "342 does not exist as a key: Cannot update"):
+            print("update error works")
+        else:
+            raise Exception(e)
+    
+    try:
+        storage.readKey("1")
+    except Exception as e:
+        if(str(e) == "1 does not exist as a key: Cannot read"):
+            print("read error works")
+        else:
+            raise Exception(e)
+
+    try:
+        storage.deleteKey("123")
+    except Exception as e:
+        if(str(e) == "123 does not exist as a key: Cannot delete"):
+            print("delete error works")
+        else:
+            raise Exception(e)
+    
+if __name__ == "__main__":
+    test_task2()
