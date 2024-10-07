@@ -100,25 +100,37 @@ class StringArray(list):
             self.frequency[i] /= total
 
 def text_task1():
-    lotsOfStringsFile = "/Users/davidzhao/Dev/CodingQuestions/general/test_files/string_array.txt"
+    lotsOfStringsFile = "general/test_files/string_array.txt"
+    lotsOfNumbersFile = "general/test_files/numbers.txt"
+    checkSort = False
     with open(lotsOfStringsFile) as stringFile:
         stringTestArray = stringFile.read().split()
         stringArrayFormater = ArrayHandler(stringTestArray)
-        print(stringArrayFormater.array.frequency)
+        print(f"frequency of n/a: {stringArrayFormater.array.frequency['n/a']}")
         stringFile.close()
-    lotsOfNumbersFile = "/Users/davidzhao/Dev/CodingQuestions/general/test_files/numbers.txt"
+    print("string array handled correctly")
     with open(lotsOfNumbersFile) as numberFile:
         numTestArray = numberFile.read().split()
         for i in range(len(numTestArray)):
             if(numTestArray[i] != "n/a"):
                 numTestArray[i] = int(numTestArray[i])
         numArrayFormater = ArrayHandler(numTestArray)
-        print(numArrayFormater.array.min)
-        print(numArrayFormater.array.max)
-        print(numArrayFormater.array.mode)
-        print(numArrayFormater.array.median)
-        print(numArrayFormater.array.mean)
-        print(numArrayFormater.array.sortingList)
+        print(f"min: {numArrayFormater.array.min}")
+        print(f"max: {numArrayFormater.array.max}")
+        print(f"mode: {numArrayFormater.array.mode}")
+        print(f"median: {numArrayFormater.array.median}")
+        print(f"mean: {numArrayFormater.array.mean}")
+        for i in range(len(numArrayFormater.array.sortingList)):
+            if i + 1 < len(numArrayFormater.array.sortingList):
+                if i < i+1:
+                    checkSort = True 
+                else:
+                    checkSort = False
+                    break
+        if checkSort:
+            print("numeric list is sorted")
+        else:
+            raise Exception("numeric list is not sorted")
         numberFile.close()
     try:
         stringTestArray.extend(numTestArray)
