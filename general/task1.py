@@ -19,17 +19,14 @@ def checkNumeric(inArray:list):
 
 class ArrayHandler():
     def __init__(self, inArray:list):
-        try:
-            self.isNumeric = checkNumeric(inArray)
-            self.isString = checkString(inArray)
-            if self.isString:
-                self.array = StringArray(inArray=inArray)
-            elif self.isNumeric:
-                self.array = NumericArray(inArray=inArray)
-            else:
-                raise Exception("Array is of neither numeric and string, unknown case")
-        except:
-            raise Exception("issue creating array")
+        self.isNumeric = checkNumeric(inArray)
+        self.isString = checkString(inArray)
+        if self.isString and not self.isNumeric:
+            self.array = StringArray(inArray=inArray)
+        elif self.isNumeric and not self.isString:
+            self.array = NumericArray(inArray=inArray)
+        else:
+            raise Exception("Array is of neither numeric and string, unknown case")
 
 class NumericArray(list):
     def __init__(self, inArray:list):
@@ -102,7 +99,7 @@ class StringArray(list):
         for i in self.frequency.keys():
             self.frequency[i] /= total
 
-if __name__ == "__main__":
+def text_task1():
     lotsOfStringsFile = "/Users/davidzhao/Dev/CodingQuestions/general/test_files/string_array.txt"
     with open(lotsOfStringsFile) as stringFile:
         stringTestArray = stringFile.read().split()
@@ -123,8 +120,17 @@ if __name__ == "__main__":
         print(numArrayFormater.array.mean)
         print(numArrayFormater.array.sortingList)
         numberFile.close()
-    stringTestArray.extend(numTestArray)
-    brokenFormater = ArrayHandler(stringTestArray)
+    try:
+        stringTestArray.extend(numTestArray)
+        brokenFormater = ArrayHandler(stringTestArray)
+    except Exception as e:
+        if str(e) == "Array is of neither numeric and string, unknown case":
+            print("array of multiple types is catched")
+        else:
+            raise Exception(e)
+        
+if __name__ == "__main__":
+    text_task1()
 
 
 
