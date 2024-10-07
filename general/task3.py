@@ -4,14 +4,14 @@ import os
 
 def textFileProcesser(textFile:str):
     punc = '''!()-[]}{;:'"\,<>./?@#$%^&*_~'''
-    inArray = textFile.read().split(" ")
+    inArray = textFile.read().split()
     try:
         for i in range(len(inArray)):
             inArray[i] = int(inArray[i])
-    except TypeError:
+    except:
         for word in inArray:
             for char in word:
-                if char in punc and word != "n/a":
+                if char in punc and word != "n/a" and word != "^p":
                     word = word.replace(char, "")
     
     data = fileToArray.ArrayHandler(inArray)
@@ -58,6 +58,6 @@ def fileReader(fileName:str):
         raise Exception(f"{fileName} was not found within directory")
 
 if __name__ == "__main__":
-    fileToRead = "MBA_good.csv"
+    fileToRead = "pagesTest.txt"
     read = fileReader(f"/Users/davidzhao/Dev/CodingQuestions/general/test_files/{fileToRead}")
-    print(read)
+    print(read.array)
